@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Turn Tracking</string>
+
+    <string name="login_bienvenido">Bienvenidos</string>
+    <string name="login_google">Acceder con Google</string>
+    <string name="login_facebook">Acceder con Facebook</string>
+    <string name="login_mail">Acceder con cuenta de mail</string>
 </resources>
