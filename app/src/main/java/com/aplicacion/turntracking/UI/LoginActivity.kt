@@ -9,9 +9,15 @@ import com.aplicacion.turntracking.R
 import com.aplicacion.turntracking.analytics.TrackingAnalyticsHandler
 import com.aplicacion.turntracking.analytics.TrackingAnalyticsLogger
 import com.aplicacion.turntracking.databinding.ActivityLoginBinding
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -20,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var analytics: TrackingAnalyticsLogger
     private val GOOGLE_SIGN_IN = 100
+    private val callBackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme) //le seteo nuevamente el estilo de la aplicaciomn porqie al iniciar tiene el style del splash
@@ -51,6 +58,36 @@ class LoginActivity : AppCompatActivity() {
             googleClient.signOut() //nos desloguamos por las dudas que tenga ams de 1 cuenta
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
+
+        binding.buttonFacebook.setOnClickListener{
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+
+            LoginManager.getInstance().registerCallback(callBackManager,
+                object : FacebookCallback<LoginResult>{
+                    override fun onSuccess(result: LoginResult?) {
+                        result?.let{
+                            val token = it.accessToken
+                            val credential = FacebookAuthProvider.getCredential(token.token)
+                            FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                                if (it.isSuccessful){
+                                    saveUser(it.result?.user?.email.toString())
+                                    goToHome()
+                                }else{
+                                    showAlert()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onCancel() {
+
+                    }
+
+                    override fun onError(error: FacebookException?) {
+                       showAlert()
+                    }
+                })
+        }
     }
 
     private fun userLoged() = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).getString("email", null)
@@ -67,8 +104,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        callBackManager.onActivityResult(requestCode, resultCode, data)
 
+        super.onActivityResult(requestCode, resultCode, data)
         //Ya accedimos a la cuenta de googler del usuario, ahora lo logueamos en firebase
         if (requestCode == GOOGLE_SIGN_IN){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)

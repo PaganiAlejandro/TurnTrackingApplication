@@ -8,4 +8,8 @@
 
     //Share Preferences
     <string name = "prefs_file">"PREFERENCES_FILE_KEY"</string>
+
+    <string name="facebook_app_id">274384027272548</string>
+    <string name="fb_login_protocol_scheme">fb274384027272548</string>
+
 </resources>
