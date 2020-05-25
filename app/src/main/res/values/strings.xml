@@ -5,4 +5,7 @@
     <string name="login_google">Acceder con Google</string>
     <string name="login_facebook">Acceder con Facebook</string>
     <string name="login_mail">Acceder con cuenta de mail</string>
+
+    //Share Preferences
+    <string name = "prefs_file">"PREFERENCES_FILE_KEY"</string>
 </resources>

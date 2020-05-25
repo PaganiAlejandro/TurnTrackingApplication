@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "730048300251",
+    "firebase_url": "https://turntracking-fd9c2.firebaseio.com",
+    "project_id": "turntracking-fd9c2",
+    "storage_bucket": "turntracking-fd9c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730048300251:android:b66bb1af79cffd84c9b8fe",
+        "android_client_info": {
+          "package_name": "com.aplicacion.turntracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730048300251-4g1ndmaii4al51ocgiqa8r1v8leuptqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvv6TMJ0-J4U1goU-on4mB0SmxF7vRp1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730048300251-4g1ndmaii4al51ocgiqa8r1v8leuptqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,4 +3,14 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="purple_gradient_start">#99a5ff</color>
+    <color name="purple_gradient_end">#b75aeb</color>
+    <color name="purple">#a09bf1</color>
+    <color name="purple_dark">#7f92e4</color>
+
+    <color name="orange">#fd9e74</color>
+
+    <color name="turquoise">#44d2d4</color>
+    <color name="turquoise_medium">#3fb2be</color>
+
 </resources>
